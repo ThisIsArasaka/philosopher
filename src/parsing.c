@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:15:12 by olardeux          #+#    #+#             */
-/*   Updated: 2024/06/28 08:58:02 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/16 08:27:09 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	check_args(t_data *data, int argc, char **argv)
 		if (data->nb_eat < 0)
 			return (printf("Error: Invalid Input\n"), 0);
 	}
+	else
+		data->nb_eat = -1;
 	data->nb_philo = atoi_parting(argv[1]);
 	data->time_to_die = atoi_parting(argv[2]);
 	data->time_to_eat = atoi_parting(argv[3]);

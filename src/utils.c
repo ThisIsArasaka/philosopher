@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/26 06:20:03 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/15 19:43:09 by olardeux         ###   ########.fr       */
+/*   Created: 2024/07/14 19:23:40 by olardeux          #+#    #+#             */
+/*   Updated: 2024/07/16 08:01:37 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char **argv)
+void	free_all(t_data *data)
 {
-	t_data data;
+	free(data->philo);
+	free(data->forks);
+}
 
-	if (!check_args(&data, argc, argv))
-		return (0);
-	if (!init(&data))
-		return (0);
-	if (!init_threads(&data))
-		return (0);
-	free_all(&data);
+long int	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
