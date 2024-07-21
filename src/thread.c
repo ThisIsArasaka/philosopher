@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 14:19:02 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 15:20:55 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/21 23:55:35 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 int	is_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data_ptr->lock);
-	usleep(10);
-	if (philo->last_meal + philo->data_ptr->time_to_die < get_time())
+	if (philo->last_meal + philo->data_ptr->time_to_die < get_time()
+		&& philo->last_meal != 0)
 	{
-		printf("%d died with %ld\n", philo->id, get_time() - philo->last_meal);
 		message(DEAD, philo);
 		philo->data_ptr->philo_is_dead = 1;
 		pthread_mutex_unlock(&philo->data_ptr->lock);
@@ -42,15 +41,12 @@ void	monitor(t_data *data)
 			if (data->nb_eat > 0)
 			{
 				pthread_mutex_lock(&data->lock);
-				usleep(10);
 				if (data->philo[i].nb_eat == data->nb_eat)
 					data->finished++;
 				if (data->finished == data->nb_philo)
-				{
-					message(FINISHED, &data->philo[i]);
-					pthread_mutex_unlock(&data->lock);
-					return ;
-				}
+					return ((void)pthread_mutex_unlock(&data->lock),
+						(void)message(FINISHED, &data->philo[i]));
+				usleep(10);
 				pthread_mutex_unlock(&data->lock);
 			}
 			i++;
@@ -73,7 +69,6 @@ void	*routine(void *arg)
 		if (!philo_sleep(philo))
 			break ;
 		pthread_mutex_lock(&philo->data_ptr->lock);
-		usleep(10);
 		if (philo->data_ptr->philo_is_dead
 			|| philo->data_ptr->finished == philo->data_ptr->nb_philo)
 		{
@@ -92,10 +87,6 @@ void	init_threads(t_data *data)
 
 	i = 0;
 	data->start = get_time();
-	printf("number of philo: %d\ntime to die: %d\ntime to eat: %d\n",
-		data->nb_philo, data->time_to_die, data->time_to_eat);
-	printf("time to sleep: %d\nnumber of eat: %d\n", data->time_to_sleep,
-		data->nb_eat);
 	while (i < data->nb_philo)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &routine,

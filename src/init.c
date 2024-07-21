@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 13:52:32 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 15:13:01 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 00:06:25 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	init_philo(t_data *data)
 		data->philo[i].id = i;
 		data->philo[i].nb_eat = 0;
 		data->philo[i].data_ptr = data;
+		data->philo[i].last_meal = 0;
 		i++;
 	}
 	return (1);
@@ -52,6 +53,7 @@ static int	init_mutex(t_data *data)
 		return (printf(ERR_MUTEX), free_all(data), 0);
 	return (1);
 }
+
 static void	adress_fork(t_data *data)
 {
 	int	i;
@@ -73,6 +75,7 @@ int	init(t_data *data)
 		return (0);
 	if (!init_mutex(data))
 		return (0);
-	adress_fork(data);
+	if (data->nb_philo != 1)
+		adress_fork(data);
 	return (1);
 }

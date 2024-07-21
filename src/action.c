@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:30:53 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 15:02:10 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/21 23:49:14 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,11 @@ int	forks_action(t_philo *philo, int ACTION)
 	{
 		pthread_mutex_lock(philo->left_fork);
 		if (!philo_check(philo))
-		{
-			pthread_mutex_unlock(philo->left_fork);
-			return (0);
-		}
+			return (pthread_mutex_unlock(philo->left_fork), 0);
 		message(FORK, philo);
 		pthread_mutex_lock(philo->right_fork);
 		if (!philo_check(philo))
-		{
-			pthread_mutex_unlock(philo->left_fork);
-			pthread_mutex_unlock(philo->right_fork);
-			return (0);
-		}
+			return (forks_action(philo, DROP_FORK), 0);
 		message(FORK, philo);
 	}
 	else if (ACTION == DROP_FORK)

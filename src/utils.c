@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:23:40 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 14:04:45 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 00:08:08 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ void	free_all(t_data *data)
 
 void	destroy_mutex(t_data *data)
 {
+	int	i;
+
+	i = 0;
+	while (i < data->nb_philo)
+		pthread_mutex_destroy(&data->forks[i++]);
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->lock);
 }
