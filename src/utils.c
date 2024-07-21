@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:23:40 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/16 08:01:37 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:04:45 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@ void	free_all(t_data *data)
 {
 	free(data->philo);
 	free(data->forks);
+}
+
+void	destroy_mutex(t_data *data)
+{
+	pthread_mutex_destroy(&data->print);
+	pthread_mutex_destroy(&data->lock);
 }
 
 long int	get_time(void)

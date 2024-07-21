@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 16:15:12 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/16 08:27:09 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:11:48 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ static int	atoi_parting(char *str)
 int	check_args(t_data *data, int argc, char **argv)
 {
 	if (argc != 5 && argc != 6)
-		return (printf("Error: Wrong number of arguments\n"), 0);
+		return (printf(ERR_ARGS), 0);
 	if (argc == 6)
 	{
 		data->nb_eat = atoi_parting(argv[5]);
 		if (data->nb_eat < 0)
-			return (printf("Error: Invalid Input\n"), 0);
+			return (printf(ERR_INPUT), 0);
 	}
 	else
 		data->nb_eat = -1;
@@ -47,6 +47,6 @@ int	check_args(t_data *data, int argc, char **argv)
 	data->time_to_sleep = atoi_parting(argv[4]);
 	if (data->nb_philo < 1 || data->time_to_die < 1 || data->time_to_eat < 1
 		|| data->time_to_sleep < 1)
-		return (printf("Error: Invalid Input\n"), 0);
+		return (printf(ERR_INPUT), 0);
 	return (1);
 }
