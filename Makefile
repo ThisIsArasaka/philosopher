@@ -6,14 +6,14 @@
 #    By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/21 23:54:43 by olardeux          #+#    #+#              #
-#    Updated: 2024/07/16 09:09:22 by olardeux         ###   ########.fr        #
+#    Updated: 2024/07/22 08:22:23 by olardeux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
-SRC_FILE = main.c parsing.c init.c thread.c utils.c action.c
+SRC_FILE = main.c parsing.c init.c thread.c utils.c action.c philo.c
 OBJ_FILE = $(SRC_FILE:.c=.o)
 SRC_PATH = src/
 OBJ_PATH = obj/

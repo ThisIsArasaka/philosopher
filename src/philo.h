@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:33:08 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 15:11:06 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 08:23:24 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,12 @@ int					init(t_data *data);
 void				init_threads(t_data *data);
 void				free_all(t_data *data);
 void				message(int MSG, t_philo *philo);
-long int			get_time(void);
 int					philo_eat(t_philo *philo);
 int					philo_sleep(t_philo *philo);
 int					philo_check(t_philo *philo);
 void				destroy_mutex(t_data *data);
-
+long				get_time(void);
+int					philo_eat(t_philo *philo);
+int					philo_sleep(t_philo *philo);
+int					forks_action(t_philo *philo, int ACTION);
 #endif

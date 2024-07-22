@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 14:19:02 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/21 23:55:35 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 07:50:23 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_dead(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data_ptr->lock);
-	if (philo->last_meal + philo->data_ptr->time_to_die < get_time()
+	if (get_time() - philo->last_meal > philo->data_ptr->time_to_die
 		&& philo->last_meal != 0)
 	{
 		message(DEAD, philo);
@@ -46,10 +46,10 @@ void	monitor(t_data *data)
 				if (data->finished == data->nb_philo)
 					return ((void)pthread_mutex_unlock(&data->lock),
 						(void)message(FINISHED, &data->philo[i]));
-				usleep(10);
 				pthread_mutex_unlock(&data->lock);
 			}
 			i++;
+			usleep(10);
 		}
 	}
 }
