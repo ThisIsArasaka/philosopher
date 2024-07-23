@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:30:53 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 18:49:52 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/24 00:47:13 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	message(int MSG, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data_ptr->print);
 	if (MSG == EAT)
-		printf("%ld %d is eating\n", get_time() - philo->data_ptr->start,
-			philo->id + 1);
+		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is eating\n",
+			get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == SLEEP)
-		printf("%ld %d is sleeping\n", get_time() - philo->data_ptr->start,
-			philo->id + 1);
+		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is sleeping\n",
+			get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == THINK)
-		printf("%ld %d is thinking\n", get_time() - philo->data_ptr->start,
-			philo->id + 1);
+		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is thinking\n",
+			get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == FORK)
-		printf("%ld %d has taken a fork\n", get_time() - philo->data_ptr->start,
-			philo->id + 1);
+		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m has taken a fork\n",
+			get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == DEAD)
-		printf("%ld %d died\n", get_time() - philo->data_ptr->start, philo->id
-			+ 1);
+		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m \033[0;31m died\n\033[0;0m",
+			get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == FINISHED)
-		printf("%d philo have eaten %d times\n", philo->data_ptr->nb_philo,
-			philo->data_ptr->nb_eat);
+		printf("\033[0;33m%d philo have eaten %d times\n\033[0;0m",
+			philo->data_ptr->nb_philo, philo->data_ptr->nb_eat);
 	pthread_mutex_unlock(&philo->data_ptr->print);
 }
 

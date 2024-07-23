@@ -6,13 +6,13 @@
 #    By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/21 23:54:43 by olardeux          #+#    #+#              #
-#    Updated: 2024/07/22 08:22:23 by olardeux         ###   ########.fr        #
+#    Updated: 2024/07/24 00:27:16 by olardeux         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror 
 SRC_FILE = main.c parsing.c init.c thread.c utils.c action.c philo.c
 OBJ_FILE = $(SRC_FILE:.c=.o)
 SRC_PATH = src/
@@ -24,12 +24,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
-	@echo "Compilation done"
+	@echo "Compilation of $(NAME) done"
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
 	$(CC) $(CFLAGS) -c $< -o $@
-	@echo "Object files created"
+	@echo "Object files $@ created"
 
 clean:
 	@rm -rf $(OBJ_PATH)

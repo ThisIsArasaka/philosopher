@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:33:08 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 18:42:53 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/24 00:41:08 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 # define ERR_THREAD "Error: Thread init failed\n"
 # define ERR_JOIN "Error: Thread join failed\n"
 # define ERR_DESTROY "Error: Mutex destroy failed\n"
+
+// clolors
+# define RED "\033[0;31m"
+# define GREEN "\033[0;32m"
+# define YELLOW "\033[0;33m"
+# define BLUE "\033[0;34m"
+# define END_COLOR "\033[0m"
 
 # include <limits.h>
 # include <pthread.h>
