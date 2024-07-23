@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 14:19:02 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 07:50:23 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:43:22 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_dead(t_philo *philo)
 	if (get_time() - philo->last_meal > philo->data_ptr->time_to_die
 		&& philo->last_meal != 0)
 	{
+		if (philo->is_eating)
+			return (pthread_mutex_unlock(&philo->data_ptr->lock), 1);
 		message(DEAD, philo);
 		philo->data_ptr->philo_is_dead = 1;
 		pthread_mutex_unlock(&philo->data_ptr->lock);

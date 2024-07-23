@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 13:52:32 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 00:06:25 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:02:44 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static int	init_philo(t_data *data)
 		data->philo[i].nb_eat = 0;
 		data->philo[i].data_ptr = data;
 		data->philo[i].last_meal = 0;
+		data->philo[i].is_eating = 0;
 		i++;
 	}
 	return (1);

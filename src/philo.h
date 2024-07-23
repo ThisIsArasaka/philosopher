@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:33:08 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 08:23:24 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:42:53 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_philo
 	pthread_mutex_t	*left_fork;
 	pthread_mutex_t	*right_fork;
 	long int		last_meal;
+	int				is_eating;
 	int				id;
 	int				nb_eat;
 }					t_philo;
