@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:30:53 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/24 00:47:13 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/25 00:00:46 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,14 @@ int	philo_check(t_philo *philo)
 
 int	lock_fork(t_philo *philo)
 {
-	if (philo->id % 2 == 0)
-	{
-		pthread_mutex_lock(philo->left_fork);
-		if (!philo_check(philo))
-			return (pthread_mutex_unlock(philo->left_fork), 0);
-		message(FORK, philo);
-		pthread_mutex_lock(philo->right_fork);
-		if (!philo_check(philo))
-			return (forks_action(philo, DROP_FORK), 0);
-		message(FORK, philo);
-	}
-	else if (philo->id % 2 != 0)
-	{
-		pthread_mutex_lock(philo->right_fork);
-		if (!philo_check(philo))
-			return (pthread_mutex_unlock(philo->right_fork), 0);
-		message(FORK, philo);
-		pthread_mutex_lock(philo->left_fork);
-		if (!philo_check(philo))
-			return (forks_action(philo, DROP_FORK), 0);
-		message(FORK, philo);
-	}
+	pthread_mutex_lock(philo->right_fork);
+	if (!philo_check(philo))
+		return (pthread_mutex_unlock(philo->right_fork), 0);
+	message(FORK, philo);
+	pthread_mutex_lock(philo->left_fork);
+	if (!philo_check(philo))
+		return (forks_action(philo, DROP_FORK), 0);
+	message(FORK, philo);
 	return (1);
 }
 

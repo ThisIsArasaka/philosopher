@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:20:03 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 00:09:18 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/25 00:04:01 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,6 @@ int	main(int argc, char **argv)
 	else
 		init_threads(&data);
 	free_all(&data);
-	destroy_mutex(&data);
+	// destroy_mutex(&data);
 	return (0);
 }
