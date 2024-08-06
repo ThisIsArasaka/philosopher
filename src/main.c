@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:20:03 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/25 00:04:01 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/07/27 10:43:32 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 		one_philo(&data);
 	else
 		init_threads(&data);
+	destroy_mutex(&data);
 	free_all(&data);
-	// destroy_mutex(&data);
 	return (0);
 }

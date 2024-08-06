@@ -71,15 +71,12 @@ void	*routine(void *arg)
 			break ;
 		if (!philo_sleep(philo))
 			break ;
-		pthread_mutex_lock(&philo->data_ptr->lock);
-		if (philo->data_ptr->philo_is_dead
-			|| philo->data_ptr->finished == philo->data_ptr->nb_philo)
-		{
-			pthread_mutex_unlock(&philo->data_ptr->lock);
+		if (!philo_check(philo))
 			break ;
-		}
 		message(THINK, philo);
-		pthread_mutex_unlock(&philo->data_ptr->lock);
+		if (philo->data_ptr->time_to_eat >= philo->data_ptr->time_to_sleep)
+			usleep((philo->data_ptr->time_to_eat
+					- philo->data_ptr->time_to_sleep + 1) * 1000);
 	}
 	return (NULL);
 }
@@ -95,6 +92,8 @@ void	init_threads(t_data *data)
 		if (pthread_create(&data->philo[i].thread, NULL, &routine,
 				&data->philo[i]))
 			return ((void)printf(ERR_THREAD));
+		if (i % 2 == 0)
+			usleep(10);
 		i++;
 	}
 	if (pthread_create(&data->monitor, NULL, (void *)monitor, data))
