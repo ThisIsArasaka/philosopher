@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:33:08 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/26 08:17:00 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:19:40 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,13 @@
 # define ERR_THREAD "Error: Thread init failed\n"
 # define ERR_JOIN "Error: Thread join failed\n"
 # define ERR_DESTROY "Error: Mutex destroy failed\n"
+
+# define EAT_MSG "\033[0;32m%ld : \033[0;34m%d\033[0;0m is eating\n"
+# define SLEEP_MSG "\033[0;32m%ld : \033[0;34m%d\033[0;0m is sleeping\n"
+# define THINK_MSG "\033[0;32m%ld : \033[0;34m%d\033[0;0m is thinking\n"
+# define FORK_MSG "\033[0;32m%ld : \033[0;34m%d\033[0;0m has taken a fork\n"
+# define DEAD_MSG "\033[0;32m%ld : \033[0;34m%d\033[0;31m died\n\033[0;0m"
+# define FINISHED_MSG "\033[0;33m%d philo have eaten %d times\n\033[0;0m"
 
 # include <limits.h>
 # include <pthread.h>

@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:30:53 by olardeux          #+#    #+#             */
-/*   Updated: 2024/08/06 17:00:46 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/06 17:22:15 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,19 @@
 void	message(int MSG, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->data_ptr->print);
-	if (MSG == EAT)
-		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is eating\n",
-			get_time() - philo->data_ptr->start, philo->id + 1);
+	if (MSG == FORK)
+		printf(FORK_MSG, get_time() - philo->data_ptr->start, philo->id + 1);
+	else if (MSG == EAT)
+		printf(EAT_MSG, get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == SLEEP)
-		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is sleeping\n",
-			get_time() - philo->data_ptr->start, philo->id + 1);
+		printf(SLEEP_MSG, get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == THINK)
-		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m is thinking\n",
-			get_time() - philo->data_ptr->start, philo->id + 1);
-	else if (MSG == FORK)
-		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m has taken a fork\n",
-			get_time() - philo->data_ptr->start, philo->id + 1);
+		printf(THINK_MSG, get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == DEAD)
-		printf("\033[0;32m%ld\033[0m : \033[0;34m%d\033[0;0m \033[0;31m died\n\033[0;0m",
-			get_time() - philo->data_ptr->start, philo->id + 1);
+		printf(DEAD_MSG, get_time() - philo->data_ptr->start, philo->id + 1);
 	else if (MSG == FINISHED)
-		printf("\033[0;33m%d philo have eaten %d times\n\033[0;0m",
-			philo->data_ptr->nb_philo, philo->data_ptr->nb_eat);
+		printf(FINISHED_MSG, philo->data_ptr->nb_philo,
+			philo->data_ptr->nb_eat);
 	pthread_mutex_unlock(&philo->data_ptr->print);
 }
 
