@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 14:19:02 by olardeux          #+#    #+#             */
-/*   Updated: 2024/08/06 17:11:35 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/09 10:27:23 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ int	is_dead(t_philo *philo)
 	return (1);
 }
 
+int	check_eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->data_ptr->lock);
+	if (philo->nb_eat == philo->data_ptr->nb_eat && !philo->finished)
+	{
+		philo->data_ptr->finished++;
+		philo->finished = 1;
+	}
+	if (philo->data_ptr->finished == philo->data_ptr->nb_philo)
+		return (pthread_mutex_unlock(&philo->data_ptr->lock), 0);
+	pthread_mutex_unlock(&philo->data_ptr->lock);
+	return (1);
+}
+
 void	monitor(t_data *data)
 {
 	int	i;
@@ -42,13 +56,11 @@ void	monitor(t_data *data)
 				return ;
 			if (data->nb_eat > 0)
 			{
-				pthread_mutex_lock(&data->lock);
-				if (data->philo[i].nb_eat == data->nb_eat)
-					data->finished++;
-				if (data->finished == data->nb_philo)
-					return ((void)pthread_mutex_unlock(&data->lock),
-						(void)message(FINISHED, &data->philo[i]));
-				pthread_mutex_unlock(&data->lock);
+				if (!check_eat(&data->philo[i]))
+				{
+					message(FINISHED, &data->philo[i]);
+					return ;
+				}
 			}
 			i++;
 			usleep(10);
@@ -90,9 +102,9 @@ void	init_threads(t_data *data)
 	{
 		if (pthread_create(&data->philo[i].thread, NULL, &routine,
 				&data->philo[i]))
-			return ((void)printf(ERR_THREAD));
-		if (i % 2 == 0)
-			usleep(10);
+			return (join_threads_error(data, i - 1), (void)printf(ERR_THREAD));
+		if ((i + 1) % 2 == 0)
+			usleep(100);
 		i++;
 	}
 	if (pthread_create(&data->monitor, NULL, (void *)monitor, data))

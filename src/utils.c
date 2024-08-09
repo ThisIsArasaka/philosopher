@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 19:23:40 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/22 08:01:04 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/08 14:19:02 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ void	destroy_mutex(t_data *data)
 		pthread_mutex_destroy(&data->forks[i++]);
 	pthread_mutex_destroy(&data->print);
 	pthread_mutex_destroy(&data->lock);
+}
+
+void	join_threads_error(t_data *data, int i)
+{
+	while (i >= 0)
+		pthread_join(data->philo[i--].thread, NULL);
+	destroy_mutex(data);
+	free_all(data);
 }
 
 long	get_time(void)

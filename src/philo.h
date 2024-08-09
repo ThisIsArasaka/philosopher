@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 06:33:08 by olardeux          #+#    #+#             */
-/*   Updated: 2024/08/06 17:19:40 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:33:19 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_philo
 	int				is_eating;
 	int				id;
 	int				nb_eat;
+	int				finished;
 }					t_philo;
 
 typedef struct s_data
@@ -90,4 +91,6 @@ long				get_time(void);
 int					philo_eat(t_philo *philo);
 int					philo_sleep(t_philo *philo);
 int					forks_action(t_philo *philo, int ACTION);
+void				join_threads_error(t_data *data, int i);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: olardeux <olardeux@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/14 13:52:32 by olardeux          #+#    #+#             */
-/*   Updated: 2024/07/24 23:56:40 by olardeux         ###   ########.fr       */
+/*   Updated: 2024/08/08 15:33:48 by olardeux         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static int	init_philo(t_data *data)
 		data->philo[i].data_ptr = data;
 		data->philo[i].last_meal = 0;
 		data->philo[i].is_eating = 0;
+		data->philo[i].finished = 0;
 		i++;
 	}
 	return (1);
@@ -59,15 +60,15 @@ static void	adress_fork(t_data *data)
 {
 	int	i;
 
-	i = 1;
-	while (i < data->nb_philo)
+	i = 0;
+	while (i < data->nb_philo - 1)
 	{
-		data->philo[i].left_fork = &data->forks[i - 1];
-		data->philo[i].right_fork = &data->forks[i];
+		data->philo[i].left_fork = &data->forks[i];
+		data->philo[i].right_fork = &data->forks[i + 1];
 		i++;
 	}
-	data->philo[0].left_fork = &data->forks[data->nb_philo - 1];
-	data->philo[0].right_fork = &data->forks[0];
+	data->philo[i].left_fork = &data->forks[i];
+	data->philo[i].right_fork = &data->forks[0];
 }
 
 int	init(t_data *data)
